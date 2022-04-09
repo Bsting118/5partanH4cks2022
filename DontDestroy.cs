@@ -6,10 +6,12 @@ public class DontDestroy : MonoBehaviour
 {
     public GameObject ftDropdown;
     public GameObject inchDropdown;
+    public GameObject tempCam;
 
     void Awake()
     {
         DontDestroyOnLoad(ftDropdown);
         DontDestroyOnLoad(inchDropdown);
+        DontDestroyOnLoad(tempCam);
     }
 }
