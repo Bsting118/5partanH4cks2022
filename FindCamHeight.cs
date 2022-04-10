@@ -1,22 +1,19 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class FindCamHeight : Monobehaviour {
+public class FindCamHeight : MonoBehaviour {
     public GameObject ftDropdownLabel;
     public GameObject inchDropdownLabel;
     public GameObject tempCam;
 
-    public double meterHeightCalc;
-
-    public string ftDropdownStrVal; //This will store the string num from the feet dropdown box
-    public string inchDropdownStrVal; //This will store the string num from the inch dropdown box
-
-    public int CalculateFtHeight()
+    public int CalculateFtHeight(string ftStrVal)
     {
         int ftVal;
 
         try {
-            ftVal = Convert.ToInt32(ftDropdownStrVal);
+            ftVal = Convert.ToInt32(ftStrVal);
         }
         catch (OverflowException)
         {
@@ -27,12 +24,12 @@ public class FindCamHeight : Monobehaviour {
         return ftVal;
     }
 
-    public double CalculateInchHeight()
+    public float CalculateInchHeight(string inchStrVal)
     {
         int inchVal;
-        double inchesInFeet;
+        float inchesInFeet;
         try {
-            inchVal = Convert.ToInt32(inchDropdownStrVal);
+            inchVal = Convert.ToInt32(inchStrVal);
         }
         catch (OverflowException)
         {
@@ -40,19 +37,21 @@ public class FindCamHeight : Monobehaviour {
             //This should never happen since it's only converting set valid drop down values, but better to be safe than sorry.
         }
 
-        inchesInFeet = (inchVal / 12);
+        inchesInFeet = (inchVal / 12f);
         return inchesInFeet;
     }
 
     //To be used with setting Scene 2 camera rig height in Unity
-    public void CalculateMeterCamHeight()
+    public float CalculateMeterCamHeight(string ftStr, string inchStr)
     {
-        int ftVar = CalculateFtHeight();
-        double inchVar = CalculateInchHeight();
+        int ftVar = CalculateFtHeight(ftStr);
+        float inchVar = CalculateInchHeight(inchStr);
 
-        double totalFt = ftVar + inchVar;
+        float totalFt = ftVar + inchVar;
 
-        meterHeightCalc = (totalFt / 3.2808);  //Applying feet to meters conversion formula => [m = (ft / 3.2808)]
+        float meterHeightCalc = (totalFt / 3.2808f);  //Applying feet to meters conversion formula => [m = (ft / 3.2808)]
+
+        return meterHeightCalc;
 
     }
 
@@ -61,12 +60,10 @@ public class FindCamHeight : Monobehaviour {
         Text ftDropdownText = ftDropdownLabel.GetComponent<Text>();
         Text inchDropdownText = inchDropdownLabel.GetComponent<Text>();
 
-        ftDropdownStrVal = ftDropdownText.text; //This will store the string num from the feet dropdown box
-        inchDropdownStrVal = inchDropdownText.text; //This will store the string num from the inch dropdown box
+        string ftDropdownStrVal = ftDropdownText.text; //This will store the string num from the feet dropdown box
+        string inchDropdownStrVal = inchDropdownText.text; //This will store the string num from the inch dropdown box
 
-        //CalculateMeterCamHeight();
-
-        tempCam.transform.position = new Vector3(0, CalculateMeterCamHeight(), 0);
+        tempCam.transform.position = new Vector3(0, CalculateMeterCamHeight(ftDropdownStrVal, inchDropdownStrVal), 0);
 
         Debug.Log(tempCam.transform.position);
 
