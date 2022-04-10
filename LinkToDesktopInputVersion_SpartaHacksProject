@@ -1,0 +1,10 @@
+Please copy and paste the link below to your web browser to test out and see the vision/rough draft of a 3D VR photo render game meant to aid mentally ill with memory problems by 
+immersing them in a nostalgic, comfortable, and memorable 3D virtual environment that elevates off of a 2D digital photo. 
+
+**NOTE: This is the version that includes the desktop functionality over the VR functionality, so no VR controllers or headset preview is available in this version.
+Unity has some strange input variations between VR and normal 3D games so the push button GUI scene 1 would not work if VR control inputs were enabled.
+To see the VR control inputs in action, please see the demo project V2 zip folder uploaded by my team member.**
+
+=============================================================================
+LINK: https://play.unity.com/mg/other/spartahack2022proj_publishwebgl
+=============================================================================
